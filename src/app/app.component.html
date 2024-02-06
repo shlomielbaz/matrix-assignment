@@ -1,0 +1,70 @@
+<main class="main">
+  <div class="content">
+    <div class="left-side">
+
+      <div class="game-board">
+        <div *ngFor="let row of Rows(); let i = index" class="game-col" [attr.data-col]="i">
+          <div *ngFor="let col of Cols(); let j = index" class="game-row" [attr.data-row]="j" [id]="'cell_' + j + '_' + i">
+            <app-cell [rowIdx]="j" [colIdx]="i" (onChangeEvent)="onChange($event)" (onFocusEvent)="onMark($event)" (onErrorEvent)="onError($event)"></app-cell>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="game-col">{{error}}</div>
+      </footer>
+    </div>
+
+    <div class="divider" role="separator" aria-label="Divider"></div>
+
+    <div class="right-side">
+
+      <div class="w-full max-w-xs">
+        <div class="mb-4">
+          <input
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            type="number" placeholder="Enter Number of Cols" [(ngModel)]="cols" min="0"
+          oninput="validity.valid||(value='');" />
+        </div>
+        <div class="mb-4">
+          <input
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            type="number" placeholder="Enter Number of Rows" [(ngModel)]="rows" min="0"
+          oninput="validity.valid||(value='');" />
+        </div>
+        <div class="mb-4">
+          <input
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            type="number" placeholder="Enter Limit Number" [(ngModel)]="limit" min="0"
+          oninput="validity.valid||(value='');" />
+        </div>
+
+        <div class="flex items-center justify-between">
+          <button (click)="gameCreate()" type="button"
+            class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
+            Create
+          </button>
+        </div>
+
+      </div>
+
+      <br /><br />
+      
+      <div class="w-full max-w-xs">
+        <div class="mb-4">
+          Horizontal Value: {{h}}
+        </div>
+        <div class="mb-4">
+          Vertical Value: {{v}}
+        </div>
+        <div class="mb-4">
+          Slant Right Value: {{l}}
+        </div>
+        <div class="mb-4">
+          Slant Left Value: {{r}}
+        </div>
+      </div>
+
+    </div>
+  </div>
+</main>
