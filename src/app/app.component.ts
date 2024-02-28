@@ -20,8 +20,8 @@ import CellDto from "./code/cell.dto";
   encapsulation: ViewEncapsulation.None,
 })
 export class AppComponent {
-  cols: number = 10;
-  rows: number = 10;
+  cols: number = 0;
+  rows: number = 0;
   limit: number = 0;
 
   error?: string;

@@ -2,7 +2,7 @@
   <div class="content">
     <div class="left-side">
 
-      <div class="game-board">
+      <div *ngIf="rows > 0 && cols > 0" class="game-board">
         <div *ngFor="let row of Rows(); let i = index" class="game-col" [attr.data-col]="i">
           <div *ngFor="let col of Cols(); let j = index" class="game-row" [attr.data-row]="j">
             <app-cell [rowIdx]="j" [colIdx]="i" 
@@ -14,6 +14,10 @@
             ></app-cell>
           </div>
         </div>
+      </div>
+
+      <div *ngIf="rows == 0 || cols == 0" class="game-board">
+        Please enter rows and cols first
       </div>
       
       <footer>
