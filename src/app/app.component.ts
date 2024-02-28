@@ -116,22 +116,8 @@ export class AppComponent {
     const cells = this.cells?.toArray();
     const selected: any[] = [];
 
-    let r1 = 0,
-      r2 = cell.row,
-      r3 = cell.row,
-      r4 = cell.row,
-      r5 = cell.row,
-      c1 = 0,
-      c2 = cell.col,
-      c3 = cell.col,
-      c4 = cell.col,
-      c5 = cell.col;
-
-    this.v = 0;
-    this.h = 0;
-    this.l = 0;
-    this.r = 0;
-
+    let r1 = 0, r2 = cell.row, r3 = cell.row, r4 = cell.row, r5 = cell.row;
+    let c1 = 0, c2 = cell.col, c3 = cell.col, c4 = cell.col, c5 = cell.col;
     let isVisited = false;
 
     while (true) {
@@ -145,6 +131,7 @@ export class AppComponent {
 
         r1 = r1 + 1;
       } else if (c1 < this.cols) {
+
         selected.push({
           ...cells?.find(
             (item) => item.colIdx === c1 && item.rowIdx === cell.row
@@ -154,6 +141,7 @@ export class AppComponent {
 
         c1 = c1 + 1;
       } else if (r2 >= 0 && c2 >= 0) {
+
         selected.push({
           ...cells?.find((item) => item.colIdx === c2 && item.rowIdx === r2),
           dir: "l",
@@ -164,6 +152,7 @@ export class AppComponent {
 
         isVisited = true;
       } else if (r3 < this.rows && c3 < this.cols) {
+
         if (isVisited) {
           isVisited = false;
         } else {
@@ -176,6 +165,7 @@ export class AppComponent {
         c3 = c3 + 1;
         r3 = r3 + 1;
       } else if (r4 >= 0 && c4 < this.cols) {
+        
         selected.push({
           ...cells?.find((item) => item.colIdx === c4 && item.rowIdx === r4),
           dir: "r",
@@ -186,6 +176,7 @@ export class AppComponent {
 
         isVisited = true;
       } else if (r5 < this.rows && c5 >= 0) {
+
         if (isVisited) {
           isVisited = false;
         } else {
