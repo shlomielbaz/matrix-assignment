@@ -4,8 +4,14 @@
 
       <div class="game-board">
         <div *ngFor="let row of Rows(); let i = index" class="game-col" [attr.data-col]="i">
-          <div *ngFor="let col of Cols(); let j = index" class="game-row" [attr.data-row]="j" [id]="'cell_' + j + '_' + i">
-            <app-cell [rowIdx]="j" [colIdx]="i" (onChangeEvent)="onChange($event)" (onFocusEvent)="onMark($event)" (onErrorEvent)="onError($event)"></app-cell>
+          <div *ngFor="let col of Cols(); let j = index" class="game-row" [attr.data-row]="j">
+            <app-cell [rowIdx]="j" [colIdx]="i" 
+              (onChangeEvent)="onChange($event)" 
+              (onFocusEvent)="onFocus($event)" 
+              (onErrorEvent)="onError($event)"
+              (onMouseEnterEvent)="onMouseEnter($event)"
+              (onMouseOutEvent)="onMouseOut($event)"
+            ></app-cell>
           </div>
         </div>
       </div>
@@ -21,47 +27,42 @@
 
       <div class="w-full max-w-xs">
         <div class="mb-4">
+          <label for="colsEl">Number of Columns:</label>
           <input
             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             type="number" placeholder="Enter Number of Cols" [(ngModel)]="cols" min="0"
-          oninput="validity.valid||(value='');" />
+          oninput="validity.valid||(value='');" id="colsEl" />
         </div>
         <div class="mb-4">
+          <label for="rowsEl">Number of Rows:</label>
           <input
             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             type="number" placeholder="Enter Number of Rows" [(ngModel)]="rows" min="0"
-          oninput="validity.valid||(value='');" />
+          oninput="validity.valid||(value='');" id="rowsEl" />
         </div>
         <div class="mb-4">
+          <label for="limitEl">Limit Number:</label>
           <input
             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             type="number" placeholder="Enter Limit Number" [(ngModel)]="limit" min="0"
-          oninput="validity.valid||(value='');" />
+          oninput="validity.valid||(value='');" id="limitEl" />
         </div>
-
-        <div class="flex items-center justify-between">
-          <button (click)="gameCreate()" type="button"
-            class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
-            Create
-          </button>
-        </div>
-
       </div>
 
       <br /><br />
       
       <div class="w-full max-w-xs">
         <div class="mb-4">
-          Horizontal Value: {{h}}
+          Horizontal Sum: {{h}}
         </div>
         <div class="mb-4">
-          Vertical Value: {{v}}
+          Vertical Sum: {{v}}
         </div>
         <div class="mb-4">
-          Slant Right Value: {{l}}
+          Slant Right Sum: {{l}}
         </div>
         <div class="mb-4">
-          Slant Left Value: {{r}}
+          Slant Left Sum: {{r}}
         </div>
       </div>
 
