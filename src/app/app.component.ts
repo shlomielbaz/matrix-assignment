@@ -10,14 +10,14 @@ import { FormsModule } from "@angular/forms";
 
 import { CellComponent } from "./components/cell/cell.component";
 import CellDto from "./code/cell.dto";
+import {MatGridListModule} from '@angular/material/grid-list';
 
 @Component({
   selector: "app-root",
   standalone: true,
-  imports: [FormsModule, CommonModule, CellComponent],
+  imports: [FormsModule, CommonModule, CellComponent, MatGridListModule],
   templateUrl: "./app.component.html",
-  styleUrl: "./app.component.scss",
-  encapsulation: ViewEncapsulation.None,
+  styleUrl: "./app.component.scss"
 })
 export class AppComponent {
   cols: number = 0;
@@ -121,6 +121,7 @@ export class AppComponent {
     let isVisited = false;
 
     while (true) {
+      
       if (r1 < this.rows) {
         const item = selected.push({
           ...cells?.find(

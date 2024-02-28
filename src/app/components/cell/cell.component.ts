@@ -16,7 +16,7 @@ import { FormsModule } from "@angular/forms";
   imports: [FormsModule],
   styleUrl: "./cell.component.scss",
   template:
-    '<input type="text" [(ngModel)]="value" #inputEl (input)="onChange(inputEl.value)" (mouseenter)="onMouseEnter()" (mouseleave)="onMouseOut()" (focus)="onFocus()" class="text-center outline w-8 h-8" />',
+    '<input type="text" [(ngModel)]="value" #inputEl (input)="onChange(inputEl.value)" (mouseenter)="onMouseEnter()" (mouseleave)="onMouseOut()" (focus)="onFocus()" class="text-center matrix-input" />',
 })
 export class CellComponent {
   @Input() rowIdx: number = 0;
@@ -25,9 +25,10 @@ export class CellComponent {
 
   @Output() onChangeEvent = new EventEmitter<CellDto>();
   @Output() onFocusEvent = new EventEmitter<CellDto>();
-  @Output() onErrorEvent = new EventEmitter<string>();
   @Output() onMouseEnterEvent = new EventEmitter<CellDto>();
   @Output() onMouseOutEvent = new EventEmitter<CellDto>();
+  
+  @Output() onErrorEvent = new EventEmitter<string>();
 
   @ViewChild("inputEl", { static: true }) inputEl?: ElementRef;
   constructor(private elementRef: ElementRef) {}

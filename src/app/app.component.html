@@ -1,75 +1,79 @@
-<main class="main">
-  <div class="content">
-    <div class="left-side">
+<mat-grid-list cols="12" rowHeight="100vh">
+  <mat-grid-tile colspan="10">
+    <table *ngIf="rows > 0 && cols > 0" class="matrix-board">
+      <tbody>
+        <tr *ngFor="let row of Rows(); let i = index" class="game-col" [attr.data-col]="i">
+          <td *ngFor="let col of Cols(); let j = index" class="game-row" [attr.data-row]="j">
+            <app-cell [rowIdx]="j" [colIdx]="i" (onChangeEvent)="onChange($event)" (onFocusEvent)="onFocus($event)"
+              (onErrorEvent)="onError($event)" (onMouseEnterEvent)="onMouseEnter($event)"
+              (onMouseOutEvent)="onMouseOut($event)"></app-cell>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <footer>
+      <div class="game-col">{{error}}</div>
+    </footer>
 
-      <div *ngIf="rows > 0 && cols > 0" class="game-board">
-        <div *ngFor="let row of Rows(); let i = index" class="game-col" [attr.data-col]="i">
-          <div *ngFor="let col of Cols(); let j = index" class="game-row" [attr.data-row]="j">
-            <app-cell [rowIdx]="j" [colIdx]="i" 
-              (onChangeEvent)="onChange($event)" 
-              (onFocusEvent)="onFocus($event)" 
-              (onErrorEvent)="onError($event)"
-              (onMouseEnterEvent)="onMouseEnter($event)"
-              (onMouseOutEvent)="onMouseOut($event)"
-            ></app-cell>
-          </div>
-        </div>
-      </div>
-
-      <div *ngIf="rows == 0 || cols == 0" class="game-board">
-        Please enter rows and cols first
-      </div>
-      
-      <footer>
-        <div class="game-col">{{error}}</div>
-      </footer>
+    <div *ngIf="rows == 0 || cols == 0">
+      Please enter rows and cols first
     </div>
+  </mat-grid-tile>
+  <mat-grid-tile colspan="2" class="matrix-control">
+    <table>
+      <tbody>
+        <tr>
+          <td><label for="colsEl">Number of Columns:</label></td>
+        </tr>
+        <tr>
+          <td><input
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              type="number" placeholder="Enter Number of Cols" [(ngModel)]="cols" min="0"
+              oninput="validity.valid||(value='');" id="colsEl" /></td>
+        </tr>
+        <tr>
+          <td><label for="rowsEl">Number of Rows:</label></td>
+        </tr>
+        <tr>
+          <td><input
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              type="number" placeholder="Enter Number of Rows" [(ngModel)]="rows" min="0"
+              oninput="validity.valid||(value='');" id="rowsEl" /></td>
+        </tr>
+        <tr>
+          <td><label for="limitEl">Limit Number:</label></td>
+        </tr>
+        <tr>
+          <td> <input
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              type="number" placeholder="Enter Limit Number" [(ngModel)]="limit" min="0"
+              oninput="validity.valid||(value='');" id="limitEl" /></td>
+        </tr>
+      </tbody>
+    </table>
 
-    <div class="divider" role="separator" aria-label="Divider"></div>
+    <br /><br />
 
-    <div class="right-side">
-
-      <div class="w-full max-w-xs">
-        <div class="mb-4">
-          <label for="colsEl">Number of Columns:</label>
-          <input
-            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            type="number" placeholder="Enter Number of Cols" [(ngModel)]="cols" min="0"
-          oninput="validity.valid||(value='');" id="colsEl" />
-        </div>
-        <div class="mb-4">
-          <label for="rowsEl">Number of Rows:</label>
-          <input
-            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            type="number" placeholder="Enter Number of Rows" [(ngModel)]="rows" min="0"
-          oninput="validity.valid||(value='');" id="rowsEl" />
-        </div>
-        <div class="mb-4">
-          <label for="limitEl">Limit Number:</label>
-          <input
-            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            type="number" placeholder="Enter Limit Number" [(ngModel)]="limit" min="0"
-          oninput="validity.valid||(value='');" id="limitEl" />
-        </div>
-      </div>
-
-      <br /><br />
-      
-      <div class="w-full max-w-xs">
-        <div class="mb-4">
-          Horizontal Sum: {{h}}
-        </div>
-        <div class="mb-4">
-          Vertical Sum: {{v}}
-        </div>
-        <div class="mb-4">
-          Slant Right Sum: {{l}}
-        </div>
-        <div class="mb-4">
-          Slant Left Sum: {{r}}
-        </div>
-      </div>
-
-    </div>
-  </div>
-</main>
+    <table>
+      <tbody>
+        <tr>
+          <td>Horizontal Sum:</td>
+          <td>{{h}}</td>
+        </tr>
+        <tr>
+          <td>Vertical Sum:</td>
+          <td>{{v}}</td>
+        </tr>
+        <tr>
+          <td>Slant Right Sum:</td>
+          <td>{{l}}</td>
+        </tr>
+        <tr>
+          <td>Slant Left Sum:</td>
+          <td>{{r}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </mat-grid-tile>
+</mat-grid-list>
