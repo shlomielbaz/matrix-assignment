@@ -31,6 +31,8 @@ export class AppComponent {
   l: number = 0;
   r: number = 0;
 
+  matrix: number[] = [];
+
   @ViewChildren(CellComponent) cells: QueryList<CellComponent> | undefined;
 
   constructor(@Inject(DOCUMENT) private document: Document) {}
@@ -121,9 +123,8 @@ export class AppComponent {
     let isVisited = false;
 
     while (true) {
-      
       if (r1 < this.rows) {
-        const item = selected.push({
+        selected.push({
           ...cells?.find(
             (item) => item.colIdx === cell.col && item.rowIdx === r1
           ),
@@ -132,7 +133,6 @@ export class AppComponent {
 
         r1 = r1 + 1;
       } else if (c1 < this.cols) {
-
         selected.push({
           ...cells?.find(
             (item) => item.colIdx === c1 && item.rowIdx === cell.row
