@@ -155,7 +155,7 @@ export class AppComponent {
 
         c1 = c1 + 1;
       }
-      // pick slant-left top cells
+      // pick slant-left to top cells
       else if (r2 >= 0 && c2 >= 0) {
         selected.push({
           ...cells?.find((item) => item.colIdx === c2 && item.rowIdx === r2),
@@ -167,7 +167,7 @@ export class AppComponent {
 
         isVisited = true;
       }
-      // pick slant-left bottom cells
+      // pick slant-left to bottom cells
       else if (r3 < this.rows && c3 < this.cols) {
         if (isVisited) {
           isVisited = false;
@@ -181,7 +181,7 @@ export class AppComponent {
         c3 = c3 + 1;
         r3 = r3 + 1;
       }
-      // pick slant-right bottom cells
+      // pick slant-right to bottom cells
       else if (r4 >= 0 && c4 < this.cols) {
         selected.push({
           ...cells?.find((item) => item.colIdx === c4 && item.rowIdx === r4),
@@ -193,7 +193,7 @@ export class AppComponent {
 
         isVisited = true;
       }
-      // pick slant-right top cells
+      // pick slant-right to top cells
       else if (r5 < this.rows && c5 >= 0) {
         if (isVisited) {
           isVisited = false;
