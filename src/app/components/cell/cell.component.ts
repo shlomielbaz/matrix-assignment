@@ -16,11 +16,12 @@ import { FormsModule } from "@angular/forms";
   imports: [FormsModule],
   styleUrl: "./cell.component.scss",
   template:
-    '<input type="text" [(ngModel)]="value" #inputEl (input)="onChange(inputEl.value)" (mouseenter)="onMouseEnter()" (mouseleave)="onMouseOut()" (focus)="onFocus()" class="text-center matrix-input" />',
+    '<input type="text" [(ngModel)]="value" [disabled]="isDisabled" #inputEl (input)="onChange(inputEl.value)" (mouseenter)="onMouseEnter()" (mouseleave)="onMouseOut()" (focus)="onFocus()" class="text-center matrix-input" />',
 })
 export class CellComponent {
   @Input() rowIdx: number = 0;
   @Input() colIdx: number = 0;
+  @Input() isDisabled: boolean = true;
   value: number = 0;
 
   @Output() onChangeEvent = new EventEmitter<CellDto>();
@@ -55,7 +56,9 @@ export class CellComponent {
     cell.row = this.rowIdx;
     cell.value = this.value;
 
-    this.onMouseEnterEvent.emit(cell);
+    if (this.isDisabled == false) {
+      this.onMouseEnterEvent.emit(cell);
+    }
   }
 
   onMouseOut() {
@@ -65,7 +68,9 @@ export class CellComponent {
     cell.row = this.rowIdx;
     cell.value = this.value;
 
-    this.onMouseOutEvent.emit(cell);
+    if (this.isDisabled == false) {
+      this.onMouseOutEvent.emit(cell);
+    }
   }
 
   onFocus() {
@@ -75,6 +80,8 @@ export class CellComponent {
     cell.row = this.rowIdx;
     cell.value = this.value;
 
-    this.onFocusEvent.emit(cell);
+    if (this.isDisabled == false) {
+      this.onFocusEvent.emit(cell);
+    }
   }
 }

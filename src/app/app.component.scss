@@ -127,3 +127,7 @@ main {
     margin-block: 1.5rem;
   }
 }
+
+tr.invalid-input td {
+  color: #f00;
+}

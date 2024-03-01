@@ -4,21 +4,22 @@
       <tbody>
         <tr *ngFor="let row of Rows(); let i = index" class="game-col" [attr.data-col]="i">
           <td *ngFor="let col of Cols(); let j = index" class="game-row" [attr.data-row]="j">
-            <app-cell [rowIdx]="i" [colIdx]="j" 
+            <app-cell [rowIdx]="i" [colIdx]="j" [isDisabled]="isDisabled"
               (onChangeEvent)="onChange($event)" 
               (onFocusEvent)="onFocus($event)"
               (onErrorEvent)="onError($event)" 
               (onMouseEnterEvent)="onMouseEnter($event)"
               (onMouseOutEvent)="onMouseOut($event)"
-            ></app-cell>
+            />
           </td>
         </tr>
       </tbody>
+      <tfoot>
+        <tr>
+          <td [attr.colspan]="cols" [innerHTML]="error"></td>
+        </tr>
+      </tfoot>
     </table>
-    
-    <footer>
-      <div class="game-col">{{error}}</div>
-    </footer>
 
     <div *ngIf="rows == 0 || cols == 0">
       Please enter rows and cols first
@@ -34,7 +35,7 @@
           <td><input
               class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               type="number" placeholder="Enter Number of Cols" [(ngModel)]="cols" min="0"
-              oninput="validity.valid||(value='');" id="colsEl" /></td>
+              (input)="setEnabled()" id="colsEl" /></td>
         </tr>
         <tr>
           <td><label for="rowsEl">Number of Rows:</label></td>
@@ -43,7 +44,7 @@
           <td><input
               class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               type="number" placeholder="Enter Number of Rows" [(ngModel)]="rows" min="0"
-              oninput="validity.valid||(value='');" id="rowsEl" /></td>
+              (input)="setEnabled()" id="rowsEl" /></td>
         </tr>
         <tr>
           <td><label for="limitEl">Limit Number:</label></td>
@@ -52,7 +53,7 @@
           <td> <input
               class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               type="number" placeholder="Enter Limit Number" [(ngModel)]="limit" min="0"
-              oninput="validity.valid||(value='');" id="limitEl" /></td>
+              (input)="setEnabled()" id="limitEl" /></td>
         </tr>
       </tbody>
     </table>
@@ -69,20 +70,20 @@
           <td>Cols:</td>
           <td>{{cols}}</td>
         </tr>
-        <tr>
+        <tr #hView>
           <td>Horizontal Sum:</td>
           <td>{{h}}</td>
         </tr>
-        <tr>
+        <tr #vView>
           <td>Vertical Sum:</td>
           <td>{{v}}</td>
         </tr>
-        <tr>
-          <td>Slant Right Sum:</td>
+        <tr #lView>
+          <td>Slant Left Sum:</td>
           <td>{{l}}</td>
         </tr>
-        <tr>
-          <td>Slant Left Sum:</td>
+        <tr #rView>
+          <td>Slant Right Sum:</td>
           <td>{{r}}</td>
         </tr>
       </tbody>
